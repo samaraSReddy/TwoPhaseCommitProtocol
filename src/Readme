@@ -1,0 +1,68 @@
+1.The unzipped tar xxx-project3.tar.gz file contains the following files
+a.src directory   
+b.gen-java containing the generated java stub code for twophase.thrift 
+c.MakeFile to compile the controller and branch source code.  
+d.testclient.sh :- shell script to invoke the test cases. 
+e.testserver.sh :- shell script to invoke the test server.
+f.testtool.thrift :- Thrift file to generate test stub classes.
+g.client.sh:-Shell script to invoke the client. 
+h.coordinator.sh :- Shell script to invoke the coordinator.
+i.replica.sh :- Shell script to invoke the participant replicas.
+j.twoPhase.thrift:-  Thrift file to generate two face interface stub classes.
+
+
+Description on source files :
+
+Client.java :- Simple thread server which takes read and write requests and outputs on the screen
+   
+Coordinator.java:- Coordinator is created as  TthreadPoolServer which accepts requests from clients and process accordingly.
+  
+CoordinatorHandler.java :- Implements Coordinator Interface to handle read and write requests. It uses Sqlite internally to log the 
+						   transactions  
+
+
+InterfaceConstants.java:- All the interface constants are defined with in this class.
+
+LogEntry.java:- This class hold the attributes of log results, which are used during recovery for coordinator and participants
+
+Operation.java:- Enumeration class  containing Read and Write attributes.
+
+Participant.java:- Participant Replica is implemented as TThreadPoolServer. It process the read and write requests recieved from coordinator.  
+
+
+ParticipantHandler.java :-This class ParticipantHandler is implementation of  ParticipantFileStore.Iface
+						   Process the requests of write and read from coordinator 
+						   Takes decision and sends vote to coordinator, persists the files in permanent file system
+						   Uses sql-lite to log the transactions.
+ 
+
+TestToolServer: is TThreadPoolServer which runs on individual machines of coordinator and particpants to execute the testcases 
+
+
+TestToolHandler: implements TestToolThrift interface used to intialize the testcases to individual participants and coordinator   
+
+
+TestClient: contains main method to invoke TestTool Server to execute the test cases.
+
+
+
+Steps to execute the two phase commit implementation.
+
+Step1:
+How to compile :
+
+Run the command "make" in the location  where MakeFile is found, the source code is 
+compiled and  put into "bin\" directory 
+
+Step:2
+How to execute  test cases :
+
+
+
+
+
+Step3 :
+
+How to :	
+
+
